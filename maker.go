@@ -9,7 +9,7 @@ import (
 
 type Where map[string]string
 
-func ScanWhereQuery(fields Where) []string {
+func WhereOrArray(fields Where) []string {
 	where := make([]string, 0)
 	for field, value := range fields {
 		fieldName := utils.ToSnakeCase(field)
@@ -36,4 +36,17 @@ func ScanWhereQuery(fields Where) []string {
 		where = append(where, sql)
 	}
 	return where
+}
+
+func WhereOrString(fields Where) string {
+	whereArr := WhereOrArray(fields)
+	whereString := ""
+	for index, val := range whereArr {
+		if index == 0 {
+			whereString += "(" + val + ")"
+		} else {
+			whereString += " AND (" + val + ")"
+		}
+	}
+	return whereString
 }

@@ -12,11 +12,8 @@ func TestBasic(t *testing.T) {
 	where["username|nickname"] = "panco"
 	where["id|user_id#>="] = "1"
 	where["id|user_id#<"] = "2"
-	res := ScanWhereQuery(where)
-	t.Log(res[0])
-	t.Log(res[1])
-	t.Log(res[2])
-	t.Log(res[3])
-	t.Log(res[4])
-	t.Log(res[5])
+	arr := WhereOrArray(where)
+	t.Log(arr)
+	str := WhereOrString(where)
+	t.Log(str)
 }
